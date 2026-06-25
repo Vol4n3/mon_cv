@@ -1,6 +1,6 @@
 import {JSDOM} from "jsdom";
-
-export function prerender(dom: JSDOM): JSDOM {
+import {readFile} from "node:fs/promises"
+export async function prerender(dom: JSDOM): Promise<JSDOM> {
     dom.window.document.head.insertAdjacentHTML("beforeend", `
         <meta charset="UTF-8"/>
         <link rel="apple-touch-icon" sizes="57x57" href="/ressource/icon/apple-icon-57x57.png">
@@ -24,5 +24,6 @@ export function prerender(dom: JSDOM): JSDOM {
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Cv Julien Coeurvolan</title>
     `)
+    dom.window.document.body.insertAdjacentHTML("beforeend",await readFile('common/prerender/prerender.html',{encoding: "utf-8"}))
     return dom
 }

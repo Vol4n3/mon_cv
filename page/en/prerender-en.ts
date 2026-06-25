@@ -1,7 +1,8 @@
 import {JSDOM} from "jsdom";
-import {prerender} from "../../common/prerender.ts";
+import {prerender} from "../../common/prerender/prerender.ts";
 
-export default function (dom: JSDOM): JSDOM {
-    dom.window.document.documentElement.setAttribute("lang", "fr");
-    return prerender(dom)
+export default async function (dom: JSDOM): Promise<JSDOM> {
+    const before = await prerender(dom);
+    before.window.document.documentElement.setAttribute("lang", "fr");
+    return before
 }

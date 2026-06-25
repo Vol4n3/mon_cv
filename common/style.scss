@@ -1,0 +1,52 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  background: gray;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr 3fr;
+  grid-template-rows: 1fr 7fr 1fr;
+  gap: 0;
+  grid-template-areas:
+    "header header header"
+    "aside content content"
+    "aside footer footer";
+}
+header{
+  grid-area: header;
+  background: orangered;
+}
+aside{
+  grid-area: aside;
+  background: darkgreen;
+}
+section{
+  grid-area: content;
+  background: darkblue;
+}
+footer{
+  grid-area: footer;
+  background-color: darkmagenta;
+}
+h1,h2,h3,h4,h5,h6,p{
+  margin: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  font-family: sans-serif;
+}
+h1{
+  font-size: 32pt;
+}
+h2{
+  font-size: 24pt;
+}
+h3{
+  font-size: 18pt;
+}

@@ -6,7 +6,6 @@ export default defineConfig({
     plugins: [
         {
             name: 'vite-prerender-plugin',
-            apply: 'build',
             enforce: 'post',
             transformIndexHtml: {
                 order: "pre",
@@ -16,9 +15,10 @@ export default defineConfig({
                     if (!rendererScriptElement) return
                     const src = rendererScriptElement.src;
                     const folderPath = ctx.filename.replace("index.html", "");
-                    const {default: moduleA} = await import(folderPath + src);
+                    const {default: prerender} = await import(folderPath + src);
                     rendererScriptElement.remove();
-                    return moduleA(doc).serialize();
+                    const finalRender = await prerender(doc)
+                    return finalRender.serialize();
                 }
             },
         }
