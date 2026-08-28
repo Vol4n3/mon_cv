@@ -3,6 +3,7 @@ import { resolve } from "node:path"
 import { JSDOM } from "jsdom"
 
 export default defineConfig({
+  base: `/mon_cv`,
   plugins: [
     {
       name: `vite-prerender-plugin`,
