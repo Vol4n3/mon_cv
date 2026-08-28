@@ -1,0 +1,94 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+ul,ol,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.material-icons {
+    user-select: none;
+}
+
+header, aside, section, footer {
+    position: relative;
+}
+
+header {
+    grid-area: header;
+    background: orangered;
+}
+
+aside {
+    grid-area: aside;
+    background: darkgreen;
+}
+
+section {
+    grid-area: content;
+    background: darkblue;
+}
+
+footer {
+    grid-area: footer;
+    background-color: darkmagenta;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print, screen {
+    main {
+        width: 210mm;
+        height: 297mm;
+        position: relative;
+        background: gray;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 3fr 3fr;
+        grid-template-rows: 1fr 7fr 1fr;
+        gap: 0;
+        grid-template-areas:
+    "header header header"
+    "aside content content"
+    "aside footer footer";
+    }
+
+    h1 {
+        font-size: 32pt;
+    }
+
+    h2 {
+        font-size: 24pt;
+    }
+
+    h3 {
+        font-size: 18pt;
+    }
+
+    h4 {
+        font-size: 16pt;
+    }
+
+    p, body {
+        font-size: 10pt;
+    }
+    .material-icons {
+        font-size: 10pt;
+    }
+
+}

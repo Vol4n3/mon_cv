@@ -1,7 +1,9 @@
-import {JSDOM} from "jsdom";
-import {readFile} from "node:fs/promises"
-export async function prerender(dom: JSDOM): Promise<JSDOM> {
-    dom.window.document.head.insertAdjacentHTML("beforeend", `
+import { JSDOM } from "jsdom"
+import { readFile } from "node:fs/promises"
+
+export const prerender = async (html: string): Promise<string> => {
+  const dom = new JSDOM(html)
+  dom.window.document.head.insertAdjacentHTML(`beforeend`, `
         <meta charset="UTF-8"/>
         <link rel="apple-touch-icon" sizes="57x57" href="/ressource/icon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/ressource/icon/apple-icon-60x60.png">
@@ -21,9 +23,12 @@ export async function prerender(dom: JSDOM): Promise<JSDOM> {
         <meta name="msapplication-TileImage" content="/ressource/icon/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
         <link rel="icon" type="image/x-icon" href="/ressource/icon/favicon.ico">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Cv Julien Coeurvolan</title>
     `)
-    dom.window.document.body.insertAdjacentHTML("beforeend",await readFile('common/prerender/prerender.html',{encoding: "utf-8"}))
-    return dom
+  dom.window.document.body.insertAdjacentHTML(`beforeend`, await readFile(`common/prerender/prerender-body.html`, { encoding: `utf-8` }))
+
+  return dom.serialize()
 }
