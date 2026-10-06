@@ -1,72 +1,36 @@
-html, body {
-    margin: 0;
-    padding: 0;
-}
-ul,ol,li{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.material-icons {
-    user-select: none;
-}
-
-header, aside, section, footer {
-    position: relative;
-}
-
-header {
-    grid-area: header;
-    background: orangered;
-}
-
-aside {
-    grid-area: aside;
-    background: darkgreen;
-}
-
-section {
-    grid-area: content;
-    background: darkblue;
-}
-
-footer {
-    grid-area: footer;
-    background-color: darkmagenta;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: sans-serif;
-}
-
-img {
-    width: 100%;
-    height: auto;
+:root {
+    --spacing-m: 1rem;
 }
 @page {
     size: A4;
     margin: 0;
 }
-@media print, screen {
-    main {
-        width: 210mm;
-        height: 297mm;
-        position: relative;
-        background: gray;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 3fr 3fr;
-        grid-template-rows: 1fr 7fr 1fr;
-        gap: 0;
-        grid-template-areas:
+html{
+    font-size: 16px;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    position: relative;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    grid-template-areas:
     "header header header"
     "aside content content"
     "aside footer footer";
+}
+@media screen {
+    main {
+        max-width: 1280px;
     }
+}
+@media print {
 
     h1 {
         font-size: 32pt;
@@ -87,8 +51,58 @@ img {
     p, body {
         font-size: 10pt;
     }
+
     .material-icons {
         font-size: 10pt;
     }
 
 }
+.cv-qr-code {
+    max-width: 100%;
+}
+
+.material-icons {
+    user-select: none;
+}
+
+header, aside, section, footer {
+    position: relative;
+}
+
+header {
+    grid-area: header;
+    background: orangered;
+    padding: var(--spacing-m);
+}
+
+aside {
+    grid-area: aside;
+    background: blanchedalmond;
+    padding: var(--spacing-m);
+}
+
+section {
+    grid-area: content;
+    background: aqua;
+    padding: var(--spacing-m);
+}
+
+footer {
+    grid-area: footer;
+    background-color: coral;
+    padding: var(--spacing-m);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
