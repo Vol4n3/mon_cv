@@ -12,7 +12,7 @@ export const i18nJSDOMReplace = (dom: JSDOM, record: Record<string, string>) => 
     Object.entries(record).forEach(([key, value]) => {
       if (attrValues) {
         splitAttrValues.forEach((attrValue) => {
-          if (attrValue === `textContent`) {
+          if (attrValue === `textContent` || attrValue === `true`) {
             if (element.textContent.trim() === key) {
               element.innerHTML = value
               found = true

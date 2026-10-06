@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "jsx": "react-jsx",
+    "noEmit": true,
     "moduleResolution": "bundler",
     "module": "esnext",
     "esModuleInterop": true,

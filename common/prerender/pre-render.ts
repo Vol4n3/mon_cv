@@ -1,7 +1,9 @@
 import { JSDOM } from "jsdom"
-import { readFile } from "node:fs/promises"
+import { createElement } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
+import PreRenderBody from "./pre-render-body.tsx"
 
-export const prerender = async (html: string): Promise<string> => {
+export const preRender = async (html: string): Promise<string> => {
   const dom = new JSDOM(html)
   dom.window.document.head.insertAdjacentHTML(`beforeend`, `
         <meta charset="UTF-8"/>
@@ -28,7 +30,7 @@ export const prerender = async (html: string): Promise<string> => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Cv Julien Coeurvolan</title>
     `)
-  dom.window.document.body.insertAdjacentHTML(`beforeend`, await readFile(`common/prerender/prerender-body.html`, { encoding: `utf-8` }))
+  dom.window.document.body.insertAdjacentHTML(`beforeend`, renderToStaticMarkup(createElement(PreRenderBody)))
 
   return dom.serialize()
 }

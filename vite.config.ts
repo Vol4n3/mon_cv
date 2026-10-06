@@ -1,5 +1,7 @@
 import { IndexHtmlTransformContext, MinimalPluginContextWithoutEnvironment, defineConfig } from "vite"
 import { resolve } from "node:path"
+import { pathToFileURL } from "node:url"
+import { tsImport } from "tsx/esm/api"
 import { JSDOM } from "jsdom"
 
 export default defineConfig({
@@ -14,9 +16,9 @@ export default defineConfig({
           const doc = new JSDOM(html)
           const rendererScriptElement: HTMLScriptElement | null = doc.window.document.querySelector(`script[data-prerender]`)
           if (!rendererScriptElement) return
-          const { src } = rendererScriptElement,
-            folderPath = ctx.path.replace(`index.html`, ``),
-            { default: prerender } = await import(`../..${folderPath}${src}`)
+          const src = rendererScriptElement.getAttribute(`src`)!,
+            rendererPath = resolve(ctx.filename, `..`, src),
+            { default: prerender } = await tsImport(pathToFileURL(rendererPath).href, import.meta.url)
           rendererScriptElement.remove()
           return prerender(doc.serialize())
         },
